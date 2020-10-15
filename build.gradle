@@ -1,0 +1,64 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group = 'kr.hs.entrydsm'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    all {
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+    implementation 'com.itextpdf:itext7-core:7.1.9'
+    implementation 'com.itextpdf:html2pdf:3.0.1'
+
+    implementation 'net.java.dev.jets3t:jets3t:0.9.4'
+    implementation 'org.bouncycastle:bcprov-jdk16:1.46'
+    implementation 'it.ozimov:embedded-redis:0.7.3'
+
+    implementation 'com.amazonaws:aws-java-sdk-ses:1.11.852'
+    implementation 'com.amazonaws:aws-java-sdk-s3control:1.11.852'
+    implementation 'com.amazonaws:aws-java-sdk-cloudfront:1.11.867'
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'mysql:mysql-connector-java'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.h2database:h2'
+    compile 'junit:junit:4.12'
+}
+
+test {
+    useJUnitPlatform() {
+        includeTags 'First'
+        includeTags 'Second'
+    }
+}
